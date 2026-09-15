@@ -1,0 +1,551 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>
+@layer base {
+  html, body {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #0b1326;
+    color: #dae2fd;
+    scroll-behavior: smooth;
+  }
+  body {
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+
+/* Micro-interaction & Keyframe Animations */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.12); opacity: 0.85; }
+}
+
+@keyframes auroraShift {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(15px, -20px) rotate(180deg) scale(1.15); }
+  100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+}
+
+@keyframes shimmerText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes particleDrift {
+  0% { transform: translateY(0) translateX(0); opacity: 0.2; }
+  50% { transform: translateY(-30px) translateX(15px); opacity: 0.7; }
+  100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-4px) scale(1.1); }
+  60% { transform: translateY(1px) scale(0.96); }
+}
+
+/* Animation utilities */
+.animate-float-slow {
+  animation: floatSlow 5.5s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.animate-aurora {
+  animation: auroraShift 16s linear infinite;
+}
+
+.animate-shimmer-text {
+  background-size: 200% auto;
+  animation: shimmerText 5s linear infinite;
+}
+
+.animate-particle-1 { animation: particleDrift 8s ease-in-out infinite; }
+.animate-particle-2 { animation: particleDrift 11s ease-in-out infinite 2s; }
+.animate-particle-3 { animation: particleDrift 9s ease-in-out infinite 4s; }
+
+/* Staggered entrance animations */
+.fade-in-stagger-1 { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards 0.05s; }
+.fade-in-stagger-2 { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards 0.18s; }
+.fade-in-stagger-3 { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards 0.32s; }
+.fade-in-stagger-4 { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards 0.45s; }
+.fade-in-stagger-5 { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards 0.58s; }
+
+/* Card Interactive Glow & Hover */
+.interactive-card {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
+}
+.interactive-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 16px 36px -10px rgba(76, 215, 246, 0.18), 0 0 20px 0 rgba(192, 193, 255, 0.12);
+}
+.interactive-card:active {
+  transform: scale(0.99);
+}
+
+/* Chip Micro-interactivity */
+.interactive-chip {
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.interactive-chip:hover {
+  transform: translateY(-1.5px);
+  background-color: #222a3d;
+  box-shadow: 0 0 12px rgba(76, 215, 246, 0.22);
+}
+.interactive-chip:active {
+  transform: scale(0.94);
+}
+
+/* Button Shimmer */
+.btn-shimmer {
+  background-size: 200% 100%;
+  transition: all 0.3s ease;
+}
+.btn-shimmer:hover {
+  background-position: 100% 0;
+  box-shadow: 0 8px 24px -4px rgba(76, 215, 246, 0.35);
+}
+
+.tap-bounce:active .nav-icon {
+  animation: iconBounce 0.4s ease forwards;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-error": "#690005", "on-primary-fixed": "#07006c", "surface-bright": "#31394d", "error-container": "#93000a", "inverse-on-surface": "#283044", "on-primary-container": "#0d0096", "outline-variant": "#464554", "on-primary": "#1000a9", "surface-container-high": "#222a3d", "primary-container": "#8083ff", "secondary-fixed": "#acedff", "secondary-fixed-dim": "#4cd7f6", "on-primary-fixed-variant": "#2f2ebe", "primary-fixed": "#e1e0ff", "tertiary": "#d0bcff", "on-error-container": "#ffdad6", "on-tertiary-fixed-variant": "#5516be", "surface-container-low": "#131b2e", "on-secondary-container": "#00424e", "on-secondary-fixed": "#001f26", "surface": "#0b1326", "on-surface-variant": "#c7c4d7", "primary": "#c0c1ff", "surface-tint": "#c0c1ff", "on-tertiary-fixed": "#23005c", "outline": "#908fa0", "on-secondary-fixed-variant": "#004e5c", "inverse-primary": "#494bd6", "error": "#ffb4ab", "on-tertiary-container": "#340080", "tertiary-container": "#a078ff", "secondary-container": "#03b5d3", "background": "#0b1326", "on-secondary": "#003640", "on-surface": "#dae2fd", "surface-container": "#171f33", "surface-container-lowest": "#060e20", "on-tertiary": "#3c0091", "primary-fixed-dim": "#c0c1ff", "surface-dim": "#0b1326", "inverse-surface": "#dae2fd", "tertiary-fixed-dim": "#d0bcff", "surface-variant": "#2d3449", "secondary": "#4cd7f6", "surface-container-highest": "#2d3449", "on-background": "#dae2fd", "tertiary-fixed": "#e9ddff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "gutter": "1.5rem", "margin-tablet": "2rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "margin-mobile": "1.25rem", "space-xl": "2.5rem", "margin": "4rem", "gutter-mobile": "1rem" }, fontFamily: { "headline-lg-mobile": ["Space Grotesk"], "display-hero-mobile": ["Space Grotesk"], "label-pill": ["Geist"], "body-md": ["Geist"], "body-lg": ["Geist"], "headline-sm": ["Space Grotesk"], "label-meta": ["JetBrains Mono"], "body-sm": ["Geist"], "headline-md": ["Space Grotesk"], "display-hero": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "label-code": ["JetBrains Mono"] }, fontSize: { "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-pill": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "label-meta": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-hero": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-code": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }] } } } }</script></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 inset-x-0 z-50 bg-surface/75 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)] border-b border-white/5 pt-safe"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="HS Monogram Logo" class="h-8 w-auto object-contain shrink-0 transition-transform duration-300 hover:rotate-3 active:scale-95" src="https://lh3.googleusercontent.com/aida/AEtjO1VMYFOpr7f6H7e8d6BZQIt8c9NnXVDRS8udSqYZzE2mYtv7rH0CtfI6BDpM1CMs1gW9NYlkANjnCYjqUtfb9YEcmXDEcWy-Y13BPneF3QmYdhwENuDZV9se1E58ndoigslWztCGHzTzIsG0a3rmFsMfYuUnCfx9olUBroaT9LSk_0ykrIM2Hjsb2lrScnPMyTqcdwd_xYq2lJ6bWKuP7j6Bo0FdvG_hAwh_MuEocXpR7Lkz57vySC-Nwh0"><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate">Harishini S</span><div class="relative flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-secondary shrink-0"></div><div class="absolute w-3.5 h-3.5 rounded-full bg-secondary/50 animate-ping"></div></div></div><span class="font-label-meta text-label-meta text-secondary tracking-wide uppercase truncate">Available for opportunities</span></div></div><div class="flex items-center gap-space-xs shrink-0"><span class="hidden font-headline-sm text-headline-sm text-on-surface-variant">Work</span><a class="w-11 h-11 flex items-center justify-center rounded-full p-0.5 transition-all duration-300 hover:ring-2 hover:ring-secondary/60 active:scale-95 group" data-path="about-me" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40 group-hover:ring-secondary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2fOLNVLpCzdlyOwGXRA3PLZpSrG_ZG1uhLoqfc3i10U_jZOphj3xEyEalxL1l7Jj8fPICwUrWzTDi8lUnKzdV2_wqhoMyAXGVuEp64X5CGjcdDlO6jl1SQJ1QKt5IzK98fSjeYM3NE1U_pAPGaj_74P5MiSdXvzi-fe0IsYJhsJNZTerezYIdJHXbIMSXTx9n-vCdTlKJo5iuRqjVYPJxPgcOqUIPyu947dHAaQk2KtLAIrr7Zv14mAIAoRmTITzhhRo"></a></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full text-on-surface">
+<!-- Atmospheric background radial glows & animated particles -->
+<div class="relative w-full overflow-hidden px-margin-mobile flex flex-col gap-space-xl">
+<!-- Animated Aurora Light Orbs -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-84 h-84 bg-gradient-to-br from-primary/20 via-tertiary/15 to-transparent rounded-full blur-3xl pointer-events-none -z-10 animate-aurora"></div>
+<div class="absolute top-96 right-[-20%] w-72 h-72 bg-gradient-to-bl from-secondary/20 via-primary/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10 animate-aurora" style="animation-delay: -5s;"></div>
+<div class="absolute top-[1400px] left-[-20%] w-80 h-80 bg-gradient-to-tr from-tertiary-container/15 via-secondary/15 to-transparent rounded-full blur-3xl pointer-events-none -z-10 animate-aurora" style="animation-delay: -10s;"></div>
+<!-- Delicate ambient glowing light particles -->
+<div class="absolute top-28 left-6 w-1.5 h-1.5 rounded-full bg-secondary/60 blur-[0.5px] pointer-events-none animate-particle-1"></div>
+<div class="absolute top-72 right-8 w-2 h-2 rounded-full bg-primary/60 blur-[0.5px] pointer-events-none animate-particle-2"></div>
+<div class="absolute top-[680px] left-10 w-1.5 h-1.5 rounded-full bg-tertiary/60 blur-[0.5px] pointer-events-none animate-particle-3"></div>
+<div class="absolute top-[1250px] right-12 w-2 h-2 rounded-full bg-secondary/50 blur-[0.5px] pointer-events-none animate-particle-1"></div>
+<!-- 1. HERO SECTION -->
+<section class="flex flex-col items-center text-center pt-space-md fade-in-stagger-1">
+<!-- Status Badge with subtle pulse -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high/80 border border-secondary/20 backdrop-blur-md shadow-[0_0_15px_rgba(76,215,246,0.12)] mb-space-lg transition-transform hover:scale-105 cursor-default">
+<div class="relative flex items-center justify-center">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="absolute w-3.5 h-3.5 rounded-full bg-secondary/50 animate-ping"></span>
+</div>
+<span class="font-label-meta text-label-meta text-secondary font-medium tracking-wide">Open to Work: Chennai • Coimbatore • Bangalore</span>
+</div>
+<!-- Avatar with breathing aura & slow float -->
+<div class="relative mb-space-lg group animate-float-slow">
+<!-- Breathing radial glow halo -->
+<div class="absolute -inset-2.5 rounded-full bg-gradient-to-tr from-primary via-secondary to-tertiary opacity-70 blur-lg animate-glow-pulse"></div>
+<div class="relative w-32 h-32 rounded-full p-1 bg-surface-container-lowest shadow-2xl ring-2 ring-white/10 group-hover:ring-secondary/60 transition-all duration-500">
+<img alt="Harishini S - UI/UX Designer &amp; AI Prompt Engineer" class="w-full h-full rounded-full object-cover shadow-inner transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0evUm1oxyiL0vgl0z7cFpIdPIp79s2P05KE9IVdN1shGrxV1-uAOck8-od1KVpHQPb2dUgx3Auy4Few8HC8VFRFxo-iTHiMfWoPt4kc4LKwAejLtbzihwQUGQ8dfku6jFTpdpD24j9KWBFLfQxO-n5ULcxvVGaSGC9GDzSBFmQ7-HwliEBnlfPKQs2bIv19AR_cZj1meoD6VL452cxfVkmsAEGdag4KB0fXil8wzHsof8SrfaYzbEIB7chgWZ6REd4v8">
+</div>
+<div class="absolute bottom-1 right-2 w-7 h-7 rounded-full bg-surface-container-highest border border-secondary/30 flex items-center justify-center text-secondary shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+<span class="material-symbols-outlined text-[16px] animate-pulse">bolt</span>
+</div>
+</div>
+<!-- Hero Headline with subtle moving shimmer gradient -->
+<h1 class="font-display-hero-mobile text-display-hero-mobile tracking-tight text-on-surface mb-space-sm max-w-xs sm:max-w-md">
+        Designing Human Experiences with <span class="bg-gradient-to-r from-primary via-secondary to-tertiary bg-clip-text text-transparent animate-shimmer-text font-bold">AI Precision</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-space-lg leading-relaxed">
+<span class="text-on-surface font-medium">Harishini S</span> — Blending user-centered UI/UX design, interactive prototyping, and modern generative AI to craft fluid digital products.
+      </p>
+<!-- Hero CTAs with tactile transitions -->
+<div class="flex flex-col w-full gap-3 max-w-xs mb-space-lg">
+<a class="btn-shimmer flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-primary-container via-secondary-container to-primary-container text-on-primary-container font-headline-sm text-body-md font-semibold shadow-lg hover:shadow-[0_0_24px_rgba(76,215,246,0.35)] transition-all duration-300 active:scale-[0.97]" href="#featured-work">
+<span class="">View Featured Work</span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-300 group-hover:translate-y-0.5">arrow_downward</span>
+</a>
+<a class="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full bg-surface-container-high/80 border border-white/5 hover:border-secondary/30 backdrop-blur-md text-on-surface font-body-md font-medium hover:bg-surface-bright transition-all duration-300 hover:shadow-md active:scale-[0.97]" href="mailto:harishiniselvakumar2004@gmail.com">
+<span class="material-symbols-outlined text-[18px] text-secondary">mail</span>
+<span class="">Contact Me</span>
+</a>
+</div>
+<!-- Quick Social / Action Pill Bar with interactive micro-glows -->
+<div class="flex items-center justify-center gap-2 flex-wrap">
+<a class="interactive-chip flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low/80 border border-white/5 hover:border-primary/40 backdrop-blur-sm text-on-surface-variant hover:text-on-surface" href="https://www.linkedin.com/in/harishiniselvakumar/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px] text-primary">work</span>
+<span class="font-label-pill text-label-pill">LinkedIn</span>
+</a>
+<a class="interactive-chip flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low/80 border border-white/5 hover:border-tertiary/40 backdrop-blur-sm text-on-surface-variant hover:text-on-surface" href="https://www.figma.com/@harishiniselvak" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px] text-tertiary">draw</span>
+<span class="font-label-pill text-label-pill">Figma</span>
+</a>
+<a class="interactive-chip flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low/80 border border-white/5 hover:border-secondary/40 backdrop-blur-sm text-on-surface-variant hover:text-on-surface" href="mailto:harishiniselvakumar2004@gmail.com">
+<span class="material-symbols-outlined text-[16px] text-secondary">alternate_email</span>
+<span class="font-label-pill text-label-pill">Email</span>
+</a>
+<a class="interactive-chip flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low/80 border border-white/5 hover:border-secondary/40 backdrop-blur-sm text-on-surface-variant hover:text-on-surface" href="tel:+918015789801"><span class="material-symbols-outlined text-[16px] text-secondary">call</span><span class="font-label-pill text-label-pill">Call</span></a></div>
+</section>
+<!-- 2. VALUE PROPS / METRICS BANNER -->
+<section class="grid grid-cols-3 gap-2 w-full fade-in-stagger-2">
+<div class="interactive-chip flex flex-col items-center text-center p-3 rounded-2xl bg-surface-container-low/90 border border-white/5 hover:border-primary/30 backdrop-blur-md shadow-sm">
+<span class="font-headline-md text-headline-md text-primary font-bold transition-transform duration-300 hover:scale-110">2+</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase mt-0.5 leading-tight">Years Exp</span>
+<span class="font-body-sm text-[11px] text-outline mt-0.5">Design &amp; AI</span>
+</div>
+<div class="interactive-chip flex flex-col items-center text-center p-3 rounded-2xl bg-surface-container-low/90 border border-white/5 hover:border-secondary/30 backdrop-blur-md shadow-sm">
+<span class="font-headline-md text-headline-md text-secondary font-bold transition-transform duration-300 hover:scale-110">100%</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase mt-0.5 leading-tight">Figma Systems</span>
+<span class="font-body-sm text-[11px] text-outline mt-0.5">Prototypes</span>
+</div>
+<div class="interactive-chip flex flex-col items-center text-center p-3 rounded-2xl bg-surface-container-low/90 border border-white/5 hover:border-tertiary/30 backdrop-blur-md shadow-sm">
+<span class="font-headline-md text-headline-md text-tertiary font-bold transition-transform duration-300 hover:scale-110">GenAI</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase mt-0.5 leading-tight">Prompting</span>
+<span class="font-body-sm text-[11px] text-outline mt-0.5">Gemini • Claude</span>
+</div>
+</section>
+<!-- 3. FEATURED PROJECTS (CASE STUDIES) -->
+<section class="flex flex-col gap-space-md scroll-mt-20 fade-in-stagger-3" id="featured-work">
+<!-- Section Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-4 rounded-full bg-secondary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Case Studies &amp; Work</h2>
+</div>
+<span class="font-label-meta text-label-meta text-secondary uppercase tracking-widest">2 Featured Projects</span>
+</div>
+<!-- Project 1: LearnSphere Mobile App -->
+<article class="interactive-card flex flex-col rounded-3xl bg-surface-container/80 border border-white/5 hover:border-primary/40 backdrop-blur-xl overflow-hidden shadow-xl group">
+<a class="relative w-full h-48 bg-surface-container-lowest overflow-hidden block cursor-pointer group" href="https://www.figma.com/design/t2roBoiwJfwvXFkN1MtUZv/Nexora?node-id=0-1&amp;t=GvLtV1IxI0qvzVOq-1" rel="noopener noreferrer" target="_blank">
+<img alt="Nexora Social &amp; Community App Design" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcsF26gz_9v3Nvc6brsIveEHUOkLREsjiGZk81HGI_M5QYj65G1vAuhw8-5d1gKezeL8Y-jwdPeOuEgERz0bVEW-oa8diVWfljbgiIGMX6koDavWM16Euiui3m_4uhCNUgyApelYmuXtT7P-8Pz5MtE6CBPktiFfH-ALID2Pd8fuCUendGFzENX4JyB-LaeowD0u3gcVmOZbDGylLfYiY23Bf3iDfBND_wQgc9R9CP_Tin5VR1d9_ezcApTci-bZqQNjU">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/30 to-transparent pointer-events-none"></div>
+<div class="absolute top-3 left-3 right-3 flex justify-between items-start z-10">
+<span class="px-2.5 py-1 rounded-full bg-primary-container text-on-primary-container font-label-pill text-label-pill font-medium shadow-sm transition-transform duration-300 group-hover:scale-105">
+Mobile App • Social &amp; Community
+</span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary border border-secondary/20">
+<span class="material-symbols-outlined text-[14px]">draw</span>
+<span class="font-label-meta text-label-meta font-semibold">Figma Design</span>
+</div>
+</div>
+</a>
+<div class="p-space-md flex flex-col gap-3">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+Nexora: Collaborative Professional Community &amp; Social Platform
+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-normal">
+A unified professional community mobile application featuring social feeds, interactive discovery streams, member profiles, real-time messaging, and multi-modal content creation.
+</p>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-secondary font-label-meta text-[10px]">Lead UI/UX</span>
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px]">Figma Prototype</span>
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px]">Mobile UX</span>
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px]">Design System</span>
+</div>
+<div class="pt-2 flex gap-2">
+<a class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-container font-body-sm font-semibold shadow-md hover:shadow-[0_0_20px_rgba(76,215,246,0.35)] transition-all active:scale-[0.98]" href="https://www.figma.com/design/t2roBoiwJfwvXFkN1MtUZv/Nexora?node-id=0-1&amp;t=GvLtV1IxI0qvzVOq-1" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">draw</span>
+<span class="">Open in Figma</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</article>
+<!-- Project 2: Nexus Agency Landing Page -->
+<article class="interactive-card flex flex-col rounded-3xl bg-surface-container/80 border border-white/5 hover:border-secondary/40 backdrop-blur-xl overflow-hidden shadow-xl group">
+<a class="relative w-full h-48 bg-surface-container-lowest overflow-hidden block cursor-pointer group" href="https://www.figma.com/design/NSW16Q9pQ9Ga8mHuVDt3Wi/Landong-Page?node-id=7-2&amp;t=l53zHjHxP3UIUEGY-1" rel="noopener noreferrer" target="_blank"><img alt="Digital Agency Landing Page Design" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9oq1XzUbq85X5w-bZassu2xTzbpqrm3BO4rH6Z1byM3RxFacWFpZGPz1mwbcLHX8tzV0iNwCA6aSxfvFI1IR5K-jGqyvvcpAyoiMFJ5pcEFdQ1PlXHbjfK0q06IaZSiPjWfxy5_QXy9ZrTCy0na-6tLm-jk5sFOblZKbIt4CXgEuvLH5vtMB5qRhcK3yRD5nHwv4sZ3j7mVqPtnoaORUCdqem0DQ3W-G-4hc2_ROSgefAnnueC0DKvYsXLWa0-7Scja0"><div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/30 to-transparent pointer-events-none"></div><div class="absolute top-3 left-3 right-3 flex justify-between items-start z-10"><span class="px-2.5 py-1 rounded-full bg-secondary text-on-secondary font-label-pill text-label-pill font-medium shadow-sm transition-transform duration-300 group-hover:scale-105">UI/UX &amp; Web Design</span><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary border border-secondary/20"><span class="material-symbols-outlined text-[14px]">draw</span><span class="font-label-meta text-label-meta font-semibold">Figma Design</span></div></div></a>
+<div class="p-space-md flex flex-col gap-3">
+<div class="flex flex-col"><h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">Digital Agency Landing Page</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-normal">A modern, high-converting digital agency landing page designed with crisp visual hierarchy, service showcase modules, client proof sections, and interactive lead capture flows.</p></div>
+<div class="flex flex-wrap gap-1.5">
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-secondary font-label-meta text-[10px]">Figma</span>
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px]">Responsive Design</span>
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px]">Wireframing</span>
+<span class="interactive-chip px-2 py-0.5 rounded-md bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px]">Prototype</span>
+</div>
+<div class="pt-2 flex gap-2"><a class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-secondary to-primary text-on-secondary font-body-sm font-semibold shadow-md hover:shadow-[0_0_20px_rgba(76,215,246,0.35)] transition-all active:scale-[0.98]" href="https://www.figma.com/design/NSW16Q9pQ9Ga8mHuVDt3Wi/Landong-Page?node-id=7-2&amp;t=l53zHjHxP3UIUEGY-1" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px]">draw</span><span class="">Open in Figma</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a></div>
+</div>
+</article>
+</section>
+<!-- 4. SKILLS & TOOLKIT MATRIX -->
+<section class="flex flex-col gap-space-md fade-in-stagger-4" id="skills-section">
+<!-- Section Header with Subtitle -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-4 rounded-full bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Skills &amp; Toolkit</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Cross-disciplinary stack combining design strategy with modern AI tooling
+        </p>
+</div>
+<!-- Skills Tabbed/Segmented Categories -->
+<div class="flex flex-col gap-3">
+<!-- Category A: UI/UX Design -->
+<div class="interactive-card p-4 rounded-2xl bg-surface-container/70 border border-white/5 hover:border-primary/30 backdrop-blur-md flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-primary font-headline-sm text-body-md font-semibold">
+<span class="material-symbols-outlined text-[18px]">design_services</span>
+<span class="">UI/UX Design</span>
+</div>
+<span class="font-label-meta text-[10px] text-on-surface-variant uppercase">Core Discipline</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Wireframing</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Prototyping</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Responsive Web</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">User Research</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Visual Hierarchy</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Design Systems</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Usability Testing</span>
+</div>
+</div>
+<!-- Category B: Design & Dev Tools -->
+<div class="interactive-card p-4 rounded-2xl bg-surface-container/70 border border-white/5 hover:border-secondary/30 backdrop-blur-md flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-secondary font-headline-sm text-body-md font-semibold">
+<span class="material-symbols-outlined text-[18px]">token</span>
+<span class="">Design &amp; Dev Tools</span>
+</div>
+<span class="font-label-meta text-[10px] text-on-surface-variant uppercase">Production</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill font-medium flex items-center gap-1 cursor-default">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Figma
+            </span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">FigJam</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Adobe XD</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Sketch</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Canva</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill font-label-meta cursor-default">HTML5</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill font-label-meta cursor-default">CSS3</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill font-label-meta cursor-default">JavaScript</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">VS Code</span>
+</div>
+</div>
+<!-- Category C: AI & Prompt Engineering -->
+<div class="interactive-card p-4 rounded-2xl bg-surface-container/70 border border-white/5 hover:border-tertiary/30 backdrop-blur-md flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-tertiary font-headline-sm text-body-md font-semibold">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+<span class="">AI &amp; Prompt Engineering</span>
+</div>
+<span class="font-label-meta text-[10px] text-tertiary uppercase">Advanced</span>
+</div>
+<div class="flex flex-wrap gap-1.5">
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-tertiary text-[12px] font-label-pill font-medium flex items-center gap-1 cursor-default">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span> Claude AI
+            </span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">ChatGPT</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-secondary text-[12px] font-label-pill cursor-default">Google Gemini</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">Microsoft Copilot</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill font-label-meta cursor-default">Python</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill cursor-default">CI/CD Workflows</span>
+<span class="interactive-chip px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface text-[12px] font-label-pill font-label-meta cursor-default">Git &amp; GitHub</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. EXPERIENCE TIMELINE -->
+<section class="flex flex-col gap-space-md fade-in-stagger-5" id="experience-section">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-4 rounded-full bg-secondary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Career &amp; Experience</h2>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Experience 1 -->
+<div class="interactive-card p-4 rounded-2xl bg-surface-container/80 border border-white/5 hover:border-secondary/30 backdrop-blur-md flex flex-col gap-2 shadow-md">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h3 class="font-headline-sm text-body-lg text-on-surface font-semibold">
+                UI/UX Designer Intern
+              </h3>
+<p class="font-body-sm text-primary font-medium">Infotact Solutions</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container/40 text-secondary font-label-meta text-[10px] font-semibold tracking-wide uppercase shrink-0 border border-secondary/20">
+              Active / Upcoming
+            </span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">calendar_month</span>
+<span class="font-label-meta text-label-meta">Bangalore / Remote • Dec 2025 – Mar 2026</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed pt-1">
+            Contributing to cross-functional design sprints, architecting responsive web platform screens, and standardizing shared reusable Figma component libraries.
+          </p>
+</div>
+<!-- Experience 2 -->
+<div class="interactive-card p-4 rounded-2xl bg-surface-container/80 border border-white/5 hover:border-tertiary/30 backdrop-blur-md flex flex-col gap-2 shadow-md">
+<div class="flex items-start justify-between gap-2">
+<div>
+<h3 class="font-headline-sm text-body-lg text-on-surface font-semibold">
+                UI/UX Design Intern &amp; Masterclass
+              </h3>
+<p class="font-body-sm text-tertiary font-medium">NoviTech R&amp;D Pvt. Ltd.</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-meta text-[10px] uppercase shrink-0">
+              Completed
+            </span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">calendar_month</span>
+<span class="font-label-meta text-label-meta">June 2025 – July 2025</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed pt-1">
+            Graduated from intensive design masterclass covering human-centered design thinking, low-to-high fidelity wireframing, and iterative user testing methodologies.
+          </p>
+</div>
+</div>
+</section>
+<!-- 6. CONTACT & CALL TO ACTION CARD -->
+<section class="flex flex-col mb-4" id="contact-section">
+<div class="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-surface-container-high via-surface-container to-surface-container-low border border-white/5 shadow-2xl flex flex-col gap-4 text-center items-center">
+<!-- Ambient background glow inside card -->
+<div class="absolute -top-10 -right-10 w-44 h-44 bg-secondary/15 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -left-10 w-44 h-44 bg-primary/15 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Accent decorative ring -->
+<div class="w-12 h-12 rounded-2xl bg-primary-container/30 border border-primary/20 flex items-center justify-center text-primary mb-1 shadow-inner animate-glow-pulse">
+<span class="material-symbols-outlined text-[28px]">mark_email_read</span>
+</div>
+<div class="flex flex-col gap-1.5 max-w-xs">
+<h3 class="font-headline-md text-headline-sm text-on-surface font-semibold">
+            Let's build something remarkable together.
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Available for full-time roles, internships, and forward-thinking generative AI product design collaborations.
+          </p>
+</div>
+<!-- Copyable Email Card with responsive interaction -->
+<div class="w-full flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest/80 border border-white/5 backdrop-blur-sm gap-2 mt-1 transition-all hover:border-secondary/40">
+<div class="flex items-center gap-2 min-w-0 px-1">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0">alternate_email</span>
+<span class="font-label-meta text-[11px] text-on-surface truncate" id="email-text">harishiniselvakumar2004@gmail.com</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-pill text-[11px] shrink-0 flex items-center gap-1 transition-all active:scale-90" id="copy-btn" onclick="copyEmail()" type="button">
+<span class="material-symbols-outlined text-[14px] transition-transform" id="copy-icon">content_copy</span>
+<span class="" id="copy-btn-label">Copy</span>
+</button>
+</div><div class="w-full flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest/80 border border-white/5 backdrop-blur-sm gap-2 transition-all hover:border-secondary/40"><a class="flex items-center gap-2 min-w-0 px-1 text-on-surface hover:text-secondary transition-colors" href="tel:+918015789801"><span class="material-symbols-outlined text-secondary text-[18px] shrink-0">call</span><span class="font-label-meta text-[11px] font-medium truncate" id="phone-text">+91 8015789801</span></a><button class="px-3 py-1.5 rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-pill text-[11px] shrink-0 flex items-center gap-1 transition-all active:scale-90" id="copy-phone-btn" onclick="copyPhone()" type="button"><span class="material-symbols-outlined text-[14px] transition-transform" id="copy-phone-icon">content_copy</span><span class="" id="copy-phone-btn-label">Copy</span></button></div>
+<!-- Direct Action Buttons -->
+<div class="flex flex-col w-full gap-2.5 mt-2">
+<a class="btn-shimmer flex items-center justify-center gap-2 w-full py-3 px-6 rounded-full bg-gradient-to-r from-primary via-secondary to-primary text-on-primary font-body-md font-semibold shadow-lg active:scale-[0.98] transition-all hover:shadow-[0_0_20px_rgba(76,215,246,0.35)]" href="mailto:harishiniselvakumar2004@gmail.com">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span class="">Send Direct Message</span>
+</a>
+<a class="flex items-center justify-center gap-2 w-full py-2.5 px-6 rounded-full bg-surface-container-highest border border-white/5 text-on-surface font-body-sm font-medium hover:bg-surface-bright hover:border-white/10 transition-all active:scale-[0.98]" href="https://www.linkedin.com/in/harishiniselvakumar/" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px] text-primary">link</span>
+<span class="">Connect on LinkedIn</span>
+</a><a class="flex items-center justify-center gap-2 w-full py-2.5 px-6 rounded-full bg-surface-container-highest border border-white/5 text-on-surface font-body-sm font-medium hover:bg-surface-bright hover:border-white/10 transition-all active:scale-[0.98]" href="https://www.figma.com/@harishiniselvak" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[16px] text-tertiary">draw</span><span class="">Explore on Figma</span></a>
+</div>
+<!-- Location & Worldwide Remote Tag -->
+<div class="flex items-center justify-center gap-1.5 pt-2 text-outline">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-label-meta text-[11px]">Chennai • Coimbatore • Bangalore • Open to Relocate / Hybrid / On-site</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Interactive Toast Notification Modal for Prototype / Demo -->
+<div class="fixed inset-x-4 bottom-20 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none flex justify-center" id="demo-modal">
+<div class="px-4 py-3 rounded-2xl bg-surface-container-highest/95 border border-secondary/30 backdrop-blur-xl shadow-2xl flex items-center gap-3 text-on-surface max-w-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">info</span>
+<span class="font-body-sm text-body-sm" id="demo-modal-text">Notification preview</span>
+</div>
+</div>
+</div>
+<script>
+  function copyEmail() {
+    const email = "harishiniselvakumar2004@gmail.com";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(email).then(() => {
+        showCopySuccess();
+      }).catch(() => {
+        showInteractiveDemo("Copied: " + email);
+      });
+    } else {
+      showInteractiveDemo("Email: " + email);
+    }
+  }
+
+  function showCopySuccess() {
+    const label = document.getElementById('copy-btn-label');
+    const btn = document.getElementById('copy-btn');
+    const icon = document.getElementById('copy-icon');
+    if (label && btn) {
+      label.textContent = "Copied!";
+      btn.classList.add('text-secondary', 'bg-secondary/20', 'border-secondary/40');
+      if (icon) icon.textContent = "check";
+      setTimeout(() => {
+        label.textContent = "Copy";
+        btn.classList.remove('text-secondary', 'bg-secondary/20', 'border-secondary/40');
+        if (icon) icon.textContent = "content_copy";
+      }, 2000);
+    }
+    showInteractiveDemo("Email address copied to clipboard!");
+  }
+
+  function showInteractiveDemo(message) {
+    const modal = document.getElementById('demo-modal');
+    const text = document.getElementById('demo-modal-text');
+    if (modal && text) {
+      text.textContent = message;
+      modal.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+      modal.classList.add('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        modal.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+        modal.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+  }
+
+  // Handle bottom navigation active state transitions
+  function setActiveNav(element, targetId) {
+    document.querySelectorAll('.bottom-nav-item').forEach(item => {
+      item.classList.remove('text-primary', 'bg-surface-container-high/60');
+      item.classList.add('text-on-surface-variant');
+      item.removeAttribute('aria-current');
+    });
+    element.classList.add('text-primary', 'bg-surface-container-high/60');
+    element.classList.remove('text-on-surface-variant');
+    element.setAttribute('aria-current', 'page');
+
+    if (targetId) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/85 backdrop-blur-xl border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.35)]" data-active-classes="text-primary bg-surface-container-high/60"><div class="flex justify-around items-center h-16 px-space-sm"><a aria-current="page" class="bottom-nav-item tap-bounce flex flex-col items-center justify-center gap-0.5 min-w-[64px] h-12 rounded-xl transition-all duration-200 text-primary bg-surface-container-high/60 active:scale-90" data-path="work" href="#featured-work" onclick="setActiveNav(this, 'featured-work'); return false;"><span class="nav-icon material-symbols-outlined text-[22px]">folder_special</span><span class="font-label-pill text-label-pill">Work</span></a><a class="bottom-nav-item tap-bounce flex flex-col items-center justify-center gap-0.5 min-w-[64px] h-12 rounded-xl text-on-surface-variant transition-all duration-200 hover:text-on-surface active:scale-90" data-path="skills" href="#skills-section" onclick="setActiveNav(this, 'skills-section'); return false;"><span class="nav-icon material-symbols-outlined text-[22px]">psychology</span><span class="font-label-pill text-label-pill">Skills</span></a><a class="bottom-nav-item tap-bounce flex flex-col items-center justify-center gap-0.5 min-w-[64px] h-12 rounded-xl text-on-surface-variant transition-all duration-200 hover:text-on-surface active:scale-90" data-path="experience" href="#experience-section" onclick="setActiveNav(this, 'experience-section'); return false;"><span class="nav-icon material-symbols-outlined text-[22px]">history_edu</span><span class="font-label-pill text-label-pill">Experience</span></a><a class="bottom-nav-item tap-bounce flex flex-col items-center justify-center gap-0.5 min-w-[64px] h-12 rounded-xl text-on-surface-variant transition-all duration-200 hover:text-on-surface active:scale-90" data-path="contact" href="#contact-section" onclick="setActiveNav(this, 'contact-section'); return false;"><span class="nav-icon material-symbols-outlined text-[22px]">alternate_email</span><span class="font-label-pill text-label-pill">Contact</span></a></div></nav>
+
+
+
+
+</body></html>
